@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Immersive News & Events – May 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f0ede8; font-family: 'Helvetica Neue', Arial, sans-serif; color: #1a1a1a; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { opacity: 0.8; }
+
+  .wrapper { max-width: 680px; margin: 0 auto; background: #fff; }
+
+  /* ── HERO ── */
+  .hero {
+    background: #0d1f38;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .hero-content { position: relative; padding: 36px 40px 30px; }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #7fb3d8; margin-bottom: 8px; }
+  .hero h1 { font-size: 32px; font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 6px; }
+  .hero-sub { font-size: 13px; color: #9bbdd4; letter-spacing: 0.5px; }
+
+  /* ── INTRO BAR ── */
+  .intro { background: #f7f5f2; border-bottom: 1px solid #e5e0d8; padding: 16px 40px; font-size: 13px; color: #666; line-height: 1.6; }
+
+  /* ── SECTION HEADERS ── */
+  .section { padding: 36px 40px; border-bottom: 1px solid #eee; }
+  .section:last-of-type { border-bottom: none; }
+  .section-label {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+    color: #0d1f38; margin-bottom: 24px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: #e0dbd4; }
+  .section-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  /* ── WEBINAR CARDS ── */
+  .webinar-grid { display: flex; flex-direction: column; gap: 14px; }
+  .webinar-card {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: #faf9f7; border: 1px solid #e8e3dc; border-radius: 10px; padding: 16px;
+  }
+  .webinar-date-block {
+    flex-shrink: 0; width: 52px; text-align: center;
+    background: #0d1f38; border-radius: 8px; padding: 8px 4px;
+  }
+  .webinar-date-block .month { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #7fb3d8; }
+  .webinar-date-block .day { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.1; }
+  .webinar-body { flex: 1; }
+  .webinar-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-bottom: 6px; }
+  .tag-avixa { background: #e8f0fb; color: #1a5fa8; }
+  .tag-iaapa { background: #e8f5ee; color: #0f6e56; }
+  .tag-gacep { background: #faeeda; color: #854f0b; }
+  .tag-tea { background: #fbeaf0; color: #993556; }
+  .tag-segd { background: #eeedfe; color: #534ab7; }
+  .webinar-title { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; line-height: 1.4; }
+  .webinar-meta { font-size: 12px; color: #888; line-height: 1.5; }
+  .webinar-link { display: inline-block; margin-top: 8px; font-size: 12px; font-weight: 600; color: #1a5fa8; }
+
+  /* ── PODCAST / VIDEO CARDS ── */
+  .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .media-card {
+    border: 1px solid #e8e3dc; border-radius: 10px; overflow: hidden;
+    background: #faf9f7; display: flex; flex-direction: column;
+  }
+  .media-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; }
+  .media-type { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #888; margin-bottom: 5px; }
+  .media-title { font-size: 13px; font-weight: 600; color: #1a1a1a; line-height: 1.4; margin-bottom: 4px; }
+  .media-desc { font-size: 12px; color: #777; line-height: 1.5; flex: 1; }
+  .media-link { display: inline-block; margin-top: 10px; font-size: 12px; font-weight: 600; color: #1a5fa8; }
+
+  /* ── EVENTS (compact) ── */
+  .events-list { display: flex; flex-direction: column; gap: 0; }
+  .event-row {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 10px 0; border-bottom: 1px solid #f0ece6;
+  }
+  .event-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .event-dot {
+    flex-shrink: 0; margin-top: 5px;
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+  .dot-may { background: #1a5fa8; }
+  .dot-jun { background: #0f6e56; }
+  .dot-jul { background: #854f0b; }
+  .event-content { flex: 1; }
+  .event-date { font-size: 10.5px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: #999; margin-bottom: 1px; }
+  .event-title { font-size: 13px; font-weight: 600; color: #1a1a1a; margin-bottom: 2px; line-height: 1.35; }
+  .event-detail { font-size: 11.5px; color: #666; line-height: 1.45; }
+  .event-badge { display: inline-block; font-size: 9.5px; font-weight: 700; padding: 1px 6px; border-radius: 4px; margin-left: 5px; vertical-align: middle; }
+  .badge-immersive { background: #eeedfe; color: #534ab7; }
+  .badge-me { background: #faeeda; color: #854f0b; }
+  .badge-fivestone { background: #ffd505; color: #5a3e00; }
+  .event-link { font-size: 11.5px; font-weight: 600; color: #1a5fa8; margin-top: 3px; display: inline-block; }
+
+  /* ── MONTH DIVIDERS ── */
+  .month-divider { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #aaa; padding: 4px 0 8px; }
+
+  /* ── NEWS ── */
+  .news-grid { display: flex; flex-direction: column; gap: 0; }
+  .news-item {
+    padding: 16px 0;
+    border-bottom: 1px solid #f0ece6;
+  }
+  .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .news-body { flex: 1; }
+  .news-source { font-size: 10.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #aaa; margin-bottom: 3px; }
+  .news-title { font-size: 14px; font-weight: 600; color: #1a1a1a; line-height: 1.4; margin-bottom: 4px; }
+  .news-desc { font-size: 12.5px; color: #666; line-height: 1.55; }
+  .news-region { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 4px; margin-bottom: 5px; }
+  .region-us { background: #e8f0fb; color: #1a5fa8; }
+  .region-eu { background: #e8f5ee; color: #0f6e56; }
+  .region-me { background: #faeeda; color: #854f0b; }
+  .region-uk { background: #eeedfe; color: #534ab7; }
+
+  /* ── FOOTER ── */
+  .footer { background: #0d1f38; padding: 28px 40px; text-align: center; }
+  .footer p { color: #7fb3d8; font-size: 12px; line-height: 1.8; }
+  .footer strong { color: #fff; font-size: 13px; display: block; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Fivestone Studios</div>
+      <h1>Immersive News<br>& Events</h1>
+      <div class="hero-sub">May 2026 &nbsp;·&nbsp; by Marissa Mecalco using Claude AI</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    A curated digest of what's happening across the immersive media, themed entertainment, experience design, and AV industries — webinars, recordings, events, and news worth knowing.
+  </div>
+
+  <!-- ══ WEBINARS & ONLINE LEARNING ══ -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-icon" style="background:#e8f0fb;">🎓</div>
+      Webinars & Online Learning
+    </div>
+    <div class="webinar-grid">
+
+      <div class="webinar-card">
+        <div class="webinar-date-block">
+          <div class="month">May</div>
+          <div class="day">13</div>
+        </div>
+        <div class="webinar-body">
+          <span class="webinar-tag tag-tea">TEA · Webinar</span>
+          <div class="webinar-title">Transforming an Immersive IP into a Brand</div>
+          <div class="webinar-meta">1:30–3:00 PM PDT &nbsp;·&nbsp; Speakers from Martell Media House, Brand Builder, and Another Axiom. How IP becomes a lasting brand identity.</div>
+          <a class="webinar-link" href="https://teaconnect.glueup.com/event/transforming-an-immersive-ip-into-a-brand-179614/" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="webinar-card">
+        <div class="webinar-date-block">
+          <div class="month">May</div>
+          <div class="day">26</div>
+        </div>
+        <div class="webinar-body">
+          <span class="webinar-tag tag-gacep">GACEP · Certification</span>
+          <div class="webinar-title">Metrics & Analytics for Customer Engagement Programs</div>
+          <div class="webinar-meta">10:00 AM–12:00 PM CT &nbsp;·&nbsp; Full measurement stack from KPI frameworks to CRM-integrated business results. Limited to 20 participants.</div>
+          <a class="webinar-link" href="https://www.gacep.com/ev_calendar_day.asp?date=5/26/2026&eventid=137" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="webinar-card">
+        <div class="webinar-date-block">
+          <div class="month">May</div>
+          <div class="day">27</div>
+        </div>
+        <div class="webinar-body">
+          <span class="webinar-tag tag-avixa">AVIXA · Webinar</span>
+          <div class="webinar-title">Smart Workplace Power Hour: Optimizing Video in Hybrid Meeting Spaces</div>
+          <div class="webinar-meta">2:00 PM GMT &nbsp;·&nbsp; AI enhancements and practical strategies for improving video across room environments. CTS: 1 RU / CTS-D: 1 RU.</div>
+          <a class="webinar-link" href="https://www.avixa.org" target="_blank">Register →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PODCASTS & VIDEOS ══ -->
+  <div class="section" style="background:#faf9f7;">
+    <div class="section-label">
+      <div class="section-icon" style="background:#eeedfe;">▶</div>
+      Podcasts & Videos
+    </div>
+    <div class="media-grid">
+
+      <div class="media-card">
+        
+        <div class="media-body">
+          <div class="media-type">Futurespaces · Video</div>
+          <div class="media-title">Christian Lachel on Finding the Stories That Transform</div>
+          <div class="media-desc">BRC Imagination Arts CCO covers USA Pavilion Osaka 2025, Pilsner Urquell, Cailler Chocolate, and Minnesota 2031.</div>
+          <a class="media-link" href="https://www.youtube.com/watch?v=FX5rufhxAlo" target="_blank">Watch on YouTube →</a>
+        </div>
+      </div>
+
+      <div class="media-card">
+        
+        <div class="media-body">
+          <div class="media-type">Futurespaces · Video</div>
+          <div class="media-title">Primo Orpilla on Creating Place (Studio O+A)</div>
+          <div class="media-desc">Story-driven workplaces for Slack, adidas, Microsoft, Hyundai — how narrative makes space intentional.</div>
+          <a class="media-link" href="https://www.youtube.com/watch?v=D7q-fP0XLzg" target="_blank">Watch on YouTube →</a>
+        </div>
+      </div>
+
+      <div class="media-card">
+        
+        <div class="media-body">
+          <div class="media-type">Futurespaces · Video</div>
+          <div class="media-title">Matt Cottam (Tellart): Predicaments from a Designer's Workbench</div>
+          <div class="media-desc">Behind World Expo, COP, Olympic Games, and World Government Summit experiences. Designing for the larger system humans live inside.</div>
+          <a class="media-link" href="https://www.youtube.com/watch?v=MLp3FQLdwag" target="_blank">Watch on YouTube →</a>
+        </div>
+      </div>
+
+      <div class="media-card">
+        
+        <div class="media-body">
+          <div class="media-type">Futurespaces · Recording</div>
+          <div class="media-title">Aki Carpenter (RAA) on Civic Memory & Public Spaces</div>
+          <div class="media-desc">VP & CCO at Ralph Appelbaum Associates on the Obama Presidential Center, NMAAHC, and designing spaces that shape inheritance.</div>
+          <a class="media-link" href="https://www.futurespaces.com/recording" target="_blank">Watch recording →</a>
+        </div>
+      </div>
+
+      <div class="media-card">
+        
+        <div class="media-body">
+          <div class="media-type">AVIXA · Podcast</div>
+          <div class="media-title">Practically AI Ep. 1: Can AI Help You Pass the CTS Exam?</div>
+          <div class="media-desc">Mark Metzger introduces AVIXA's new AI-powered CTS Study Buddy and what it means for AV certification prep.</div>
+          <a class="media-link" href="https://www.avixa.org/avixa-tv/videos/Can-AI-Help-You-Pass-the-CTS-Exam-Introducing-AVIXA-s-Study-Buddy-Practically-AI-Ep-1/olm7zNGy" target="_blank">Watch on AVIXA TV →</a>
+        </div>
+      </div>
+
+      <div class="media-card">
+        
+        <div class="media-body">
+          <div class="media-type">TEA · Article</div>
+          <div class="media-title">State of the Industry: Personal Interaction Drives Guest Experience</div>
+          <div class="media-desc">Key takeaways from the INSPIRE Week panel moderated by Shawn McCoy (Imagine). Unified theme: storytelling is everything.</div>
+          <a class="media-link" href="https://www.teaconnect.org/news/human-connection-and-personal-moments-are-key-topic-during-state-industry" target="_blank">Read more →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ UPCOMING INDUSTRY EVENTS ══ -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-icon" style="background:#e8f5ee;">📅</div>
+      Upcoming Industry Events
+    </div>
+
+    <div class="events-list">
+
+      <div class="month-divider">May 2026</div>
+
+      <div class="event-row">
+        <div class="event-dot dot-may"></div>
+        <div class="event-content">
+          <div class="event-date">May 19 · Philadelphia, PA</div>
+          <div class="event-title">TEA Explores Philadelphia <span class="event-badge badge-immersive">Immersive</span></div>
+          <div class="event-detail">Ministry of Awe, The Franklin Institute, Universal Theme Parks: The Exhibition, and an evening mixer. Optional pre-event at Netflix House on May 18.</div>
+          <a class="event-link" href="https://teaconnect.glueup.com/event/tea-explores-philadelphia-174867/" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-dot dot-may"></div>
+        <div class="event-content">
+          <div class="event-date">May 19 · Paris, France</div>
+          <div class="event-title">TEA Tuesday — Paris</div>
+          <div class="event-detail">6:30–9:30 PM at Billy Bob's, Disney Village. Networking for the themed entertainment community across Europe.</div>
+          <a class="event-link" href="https://teaconnect.glueup.com/event/tea-tuesday-paris-178739/" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-dot dot-may"></div>
+        <div class="event-content">
+          <div class="event-date">May 19–20 · Philadelphia, PA</div>
+          <div class="event-title">SEGD Museum Exhibition PPG Party + Symposium <span class="event-badge badge-immersive">Immersive</span></div>
+          <div class="event-detail">Rooftop party at Kimpton Hotel Monaco (May 19) + behind-the-scenes symposium at the Weitzman National Museum of American Jewish History exploring "The First Salute" (May 20).</div>
+          <a class="event-link" href="https://segd.org/events/2026-segd-symposium-party/" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-dot dot-may"></div>
+        <div class="event-content">
+          <div class="event-date">May 20–23 · Philadelphia, PA</div>
+          <div class="event-title">AAM Annual Meeting & MuseumExpo — "The Museum Odyssey" <span class="event-badge badge-fivestone">Fivestone Attending</span></div>
+          <div class="event-detail">The field's flagship museum conference. Keynote: Charisse R. Lillie. Digital Media Lounge, Solutions Theater, and immersive art installations across the expo floor.</div>
+          <a class="event-link" href="https://www.aam-us.org/programs/annual-meeting/" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-dot dot-may"></div>
+        <div class="event-content">
+          <div class="event-date">May 19 · Atlanta, GA</div>
+          <div class="event-title">IHAF Executive Exchange <span class="event-badge badge-fivestone">Fivestone Attending</span></div>
+          <div class="event-detail">Full-day senior leadership gathering hosted by Maverick Studios (IHAF's In-House Agency of the Year). Candid dialogue on creative leadership at scale.</div>
+          <a class="event-link" href="https://www.ihaforum.org" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-dot dot-may"></div>
+        <div class="event-content">
+          <div class="event-date">May 19 · London, UK</div>
+          <div class="event-title">TEA Tuesday — London</div>
+          <div class="event-detail">6:00–9:00 PM at Puttshack Bank. Themed entertainment community networking in London.</div>
+          <a class="event-link" href="https://teaconnect.glueup.com/event/tea-tuesday-london-178633/" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-dot dot-may"></div>
+        <div class="event-content">
+          <div class="event-date">May 20 · Atlanta, GA</div>
+          <div class="event-title">Celebrating the Global Games (AMA Atlanta) <span class="event-badge badge-immersive">Immersive</span></div>
+          <div class="event-detail">College Football Hall of Fame. World Cup brand strategy panels on gaming, community, and what the tournament means for Atlanta. Interactive soccer experiences, networking, and a green carpet.</div>
+          <a class="event-link" href="https://www.eventbrite.com/e/celebrating-the-global-games-tickets-1985402304739" target="_blank">Get tickets →</a>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-dot dot-may"></div>
+        <div class="event-content">
+          <div class="event-date">May 28–31 · Austin, TX</div>
+          <div class="event-title">ADMERICA 2026 (AAF)</div>
+          <div class="event-detail">Annual advertising conference with keynotes from Amazon Ads, Google, Known, McKinney, Meta, and the NFL. Includes American Advertising Awards Gala and AI-focused sessions on strategy and data science.</div>
+          <a class="event-link" href="https://aaf.org/admerica" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="month-divider" style="margin-top:6px;">June 2026</div>
+
+      <div class="event-row">
+        <div class="event-dot dot-jun"></div>
+        <div class="event-content">
+          <div class="event-date">June 7 · Chicago, IL</div>
+          <div class="event-title">SEGD Chicago: NeoCon Happy Hour Kickoff</div>
+          <div class="event-detail">The Hampton Social, River North. Connect with designers before the NeoCon show floor opens.</div>
+          <a class="event-link" href="https://segd.glueup.com/event/segd-chicago-chapter-neocon-happy-hour-kickoff-177391/" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-dot dot-jun"></div>
+        <div class="event-content">
+          <div class="event-date">June 10–13 · San Diego, CA</div>
+          <div class="event-title">AIA26 — AIA Conference on Architecture & Design® <span class="event-badge badge-immersive">Immersive</span></div>
+          <div class="event-detail">350 CE sessions, AI Summit, keynote by Charlene Li on AI and disruptive transformation, 80+ architect-led city tours, and the AIA26 Expo. Tickets to AIA Awards Gala close May 15.</div>
+          <a class="event-link" href="https://conferenceonarchitecture.com/" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-dot dot-jun"></div>
+        <div class="event-content">
+          <div class="event-date">June 11 · Niagara Falls, Canada</div>
+          <div class="event-title">IAAPA Meetup: Niagara Parks</div>
+          <div class="event-detail">Evening at Table Rock Restaurant with welcome reception, leadership talk from Niagara Parks Commission, and exclusive group access to Niagara Takes Flight.</div>
+          <a class="event-link" href="https://iaapa.org/event/iaapa-meetup-niagara-parks" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-dot dot-jun"></div>
+        <div class="event-content">
+          <div class="event-date">June 13–19 · Las Vegas, NV</div>
+          <div class="event-title">InfoComm 2026 (AVIXA) <span class="event-badge badge-immersive">Immersive</span> <span class="event-badge badge-fivestone">Fivestone Attending</span></div>
+          <div class="event-detail">The world's most vital pro AV show. New immersive activations: Smart Workplace, Retail Experience, and The Pitch (sports & broadcast environment). Keynotes from Microsoft Teams and Cisco. Free Exhibit Hall Pass with code 26BADGE.</div>
+          <a class="event-link" href="https://www.avixa.org/infocomm" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-dot dot-jun"></div>
+        <div class="event-content">
+          <div class="event-date">June 23–25 · Paris, France</div>
+          <div class="event-title">GACEP European Conference <span class="event-badge badge-immersive">Waitlist Only</span> <span class="event-badge badge-fivestone">Fivestone Attending</span></div>
+          <div class="event-detail">Sold out. Limited access to Day 2 and select evening events available via waitlist. Email info@gacep.com to be added.</div>
+          <a class="event-link" href="https://www.gacep.com" target="_blank">Join waitlist →</a>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-dot dot-jun"></div>
+        <div class="event-content">
+          <div class="event-date">June 24 · Chicago, IL</div>
+          <div class="event-title">SEGD Chicago: An Evening with Manuel Lima <span class="event-badge badge-immersive">Immersive</span></div>
+          <div class="event-detail">Chicago Architecture Center. Manuel Lima, founder of VisualComplexity.com, on information visualization and the future of design.</div>
+          <a class="event-link" href="https://segd.glueup.com/event/segd-chicago-chapter-an-evening-with-manuel-lima-180528/" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-dot dot-jun"></div>
+        <div class="event-content">
+          <div class="event-date">June 26–28 · Los Angeles, CA</div>
+          <div class="event-title">IAAPA Explores: FIFA World Cup 2026 <span class="event-badge badge-immersive">Immersive</span></div>
+          <div class="event-detail">Exclusive behind-the-scenes access to Intuit Dome, COSM Sports Coliseum, Disney's Creative Campus, and the FIFA Fan Festival — plus a World Cup match at SoFi Stadium. Small executive group; space limited.</div>
+          <a class="event-link" href="https://iaapa.org/event/iaapa-explores-fifa-world-cup-2026" target="_blank">Register →</a>
+        </div>
+      </div>
+
+      <div class="month-divider" style="margin-top:6px;">July 2026</div>
+
+      <div class="event-row">
+        <div class="event-dot dot-jul"></div>
+        <div class="event-content">
+          <div class="event-date">July 6–9 · Gothenburg, Sweden</div>
+          <div class="event-title">SATE Europe & Middle East — "Roots" (TEA) <span class="event-badge badge-immersive">Immersive</span></div>
+          <div class="event-detail">Held at Liseberg, woven into Gothenburg's identity for over a century. Exploring how heritage, mythology, and community shape experiences that endure. Early bird ends May 11.</div>
+          <a class="event-link" href="https://teaconnect.glueup.com/event/tea-sate-eme-2026-liseberg-177473/" target="_blank">Register →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ INDUSTRY NEWS ══ -->
+  <div class="section" style="background:#faf9f7;">
+    <div class="section-label">
+      <div class="section-icon" style="background:#faeeda;">📰</div>
+      Industry News
+    </div>
+    <div class="news-grid">
+
+      <div class="news-item">
+        
+        <div class="news-body">
+          <span class="news-region region-us">United States</span>
+          <div class="news-source">ClickOrlando · May 2026</div>
+          <div class="news-title">Universal + UCF Launch First-Ever School of Experience Leadership and Innovation</div>
+          <div class="news-desc">Universal CEO Mark Woodbury and UCF announced the first school of its kind dedicated to themed entertainment, experience leadership, and creative technology.</div>
+          <a class="event-link" href="https://www.clickorlando.com/theme-parks/2026/05/11/universal-ucf-launch-school-to-shape-future-of-themed-entertainment/" target="_blank">Read more →</a>
+        </div>
+      </div>
+
+      <div class="news-item">
+        
+        <div class="news-body">
+          <span class="news-region region-eu">France</span>
+          <div class="news-source">IAAPA Funworld · 2026</div>
+          <div class="news-title">Moment Factory Transforms Futuroscope Pavilion into an Immersive World</div>
+          <div class="news-desc">"La Serre des Mondes" demonstrates how narrative environments can enrich theme park offerings and elevate guest engagement at scale.</div>
+          <a class="event-link" href="https://momentfactory.app.box.com/s/rq3rfgdehund7ysl77d693v7rsmpcz2i/file/2170442276635?utm_medium=email&utm_source=rasa_io&utm_campaign=newsletter" target="_blank">Read more →</a>
+        </div>
+      </div>
+
+      <div class="news-item">
+        
+        <div class="news-body">
+          <span class="news-region region-us">United States</span>
+          <div class="news-source">Comcast / Bloomberg · Q1 2026</div>
+          <div class="news-title">Universal Epic Universe Drives 24% Revenue Growth for Comcast's Theme Park Division</div>
+          <div class="news-desc">Comcast's Universal Destinations and Experiences division hit $2.3 billion in Q1 revenue — up 24% — following the opening of Epic Universe. Disney Parks also up 7% YOY.</div>
+          <a class="event-link" href="https://www.hollywoodreporter.com/business/business-news/peacock-comcast-q1-2026-earnings-report-loss-subscribers-1236572816/?utm_medium=email&utm_source=rasa_io&utm_campaign=newsletter" target="_blank">Read more →</a>
+        </div>
+      </div>
+
+      <div class="news-item">
+        
+        <div class="news-body">
+          <span class="news-region region-us">United States</span>
+          <div class="news-source">BBC News · 2026</div>
+          <div class="news-title">Are Domes and Spheres the Future of Entertainment?</div>
+          <div class="news-desc">Rivals are emerging for the Las Vegas Sphere as new immersive dome venues continue to capture global attention. The BBC examines what's driving this architectural and experiential wave.</div>
+          <a class="event-link" href="https://www.bbc.com/news/articles/cq6q66n86qyo?utm_medium=email&utm_source=rasa_io&utm_campaign=newsletter" target="_blank">Read more →</a>
+        </div>
+      </div>
+
+      <div class="news-item">
+        
+        <div class="news-body">
+          <span class="news-region region-me">Middle East</span>
+          <div class="news-source">Disney · 2026</div>
+          <div class="news-title">Disney Reiterates Commitment to Abu Dhabi Park</div>
+          <div class="news-desc">CEO Josh D'Amaro wrote to shareholders: "The strategic logic of our Abu Dhabi plans is unchanged." A major signal of continued investment in Middle East themed entertainment.</div>
+          <a class="event-link" href="https://www.arabnews.pk/node/2642682/lifestyle?utm_medium=email&utm_source=rasa_io&utm_campaign=newsletter" target="_blank">Read more →</a>
+        </div>
+      </div>
+
+      <div class="news-item">
+        
+        <div class="news-body">
+          <span class="news-region region-uk">United Kingdom</span>
+          <div class="news-source">Industry Reports · 2026</div>
+          <div class="news-title">Beatles Fan Experience Opening in London in 2027 — Seven Floors of Immersive Entertainment</div>
+          <div class="news-desc">The experience will open at the building where the "Let It Be" album was recorded — a high-profile example of music IP being translated into permanent immersive destination.</div>
+          <a class="event-link" href="https://www.clickorlando.com/entertainment/2026/05/11/new-beatles-fan-experience-set-to-open-in-london-in-2027/?utm_medium=email&utm_source=rasa_io&utm_campaign=newsletter" target="_blank">Read more →</a>
+        </div>
+      </div>
+
+      <div class="news-item">
+        
+        <div class="news-body">
+          <span class="news-region region-us">United States</span>
+          <div class="news-source">Bloomberg · April 2026</div>
+          <div class="news-title">CannonDesign Acquires Ennead Architects in Major Design Firm Merger</div>
+          <div class="news-desc">The seventh and largest acquisition for CannonDesign. Ennead retains its practice as a distinct unit with offices in New York, Los Angeles, and Shanghai.</div>
+          <a class="event-link" href="https://www.bloomberg.com/news/articles/2026-04-21/cannondesign-acquires-ennead-architects-in-major-design-firm-merger?utm_medium=email&utm_source=rasa_io&utm_campaign=newsletter" target="_blank">Read more →</a>
+        </div>
+      </div>
+
+      <div class="news-item">
+        
+        <div class="news-body">
+          <span class="news-region region-eu">Netherlands</span>
+          <div class="news-source">IAAPA News · 2026</div>
+          <div class="news-title">Toverland Announces €98 Million Expansion Including New Dark Ride</div>
+          <div class="news-desc">Plans include on-site lodging, a replacement ride for Maximus' Blitz Bahn, and a large-scale dark ride in the park's Port Laguna entrance — one of Europe's most ambitious expansion plans.</div>
+          <a class="event-link" href="https://www.l1nieuws.nl/nieuws/3136744/bobsleebaan-toverland-volgende-maand-dicht-voor-vervanging-door-nieuwe-attractie-uit-nederweert?utm_medium=email&utm_source=rasa_io&utm_campaign=newsletter" target="_blank">Read more →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <strong>Fivestone Studios Inc.</strong>
+    <p>Immersive News & Events is a curated digest for the immersive media industry.<br>
+    Covering North America · Europe · Middle East &nbsp;·&nbsp; May 2026<br>
+    Generated on 13 May 2026</p>
+  </div>
+
+</div>
+</body>
+</html>
